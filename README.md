@@ -12,6 +12,5 @@ AI ideas,
   Images generated for the website, feed company data and use it for images on the website when displaying data 
   something with data 
 
-
 TestCommit: Kyle
   
