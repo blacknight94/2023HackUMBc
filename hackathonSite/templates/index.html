@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIREN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+  </head>
+<body>
+    <div class="ribbon">
+        <h1>SIREN</h1>
+    </div>
+
+    <!-- uses both frontPanel and center class to create the buttons shown at top of page-->
+    <div class="frontPanel center">
+        <label for="Ticker">Ticker: </label>
+        <input name="Ticker" id="Ticker" />
+        <button type="button" name="TickerSubmit">Enter</button>
+
+        <!--adding functionality to create a use-able button-->
+        <form>
+            Ticker:<input type ="text" name="ticker">
+        </form>
+
+        <br />
+        <label for="stockPrice">Stock Price: </label>
+        <input name="stockPrice" id="stockPrice" />
+
+        <label for="ESG">ESG: </label>
+        <input name="ESG" id="ESG" />
+
+        <!--overall sentiment button-->
+        <label for="sentiment">sentiment: </label>
+        <input name="sentiment" id="sentiment"/>
+        <!--button for industry -->
+        <label for="industry">industry:</label>
+        <input name="industry" id="industry" />
+
+        <p></p>
+        <tbody>
+            {% for key, value in data.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </div>
+    <div class="frontPanel">
+        <h2>Related Articles</h2>
+        <a class="link" href="NotARealDomain_OrIsIt"> www.linkhere.com</a>
+    </div>
+
+    <footer>
+        <p>No Copyright - <a class="link" href="NotARealDomain_OrIsIt"> SIREN Industries</a></p>
+    </footer>
+</body>
+</html>
