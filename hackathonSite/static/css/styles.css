@@ -18,8 +18,11 @@ body {
   padding-bottom: 20px;
 }
 
-.rounded{
-    border-radius: 10px;
+/*defines standard borders for all items*/
+.border{
+  background: transparent;
+  border = 5px solid grey;
+  border-radius: 10px;/*creates rounded edges maybe*/
 }
 
 footer{
@@ -37,9 +40,6 @@ footer{
   background-color: white;
 }
 
-/* creating class for the box fo*/
-
-
 
 .link {
   color: black;
@@ -51,8 +51,8 @@ footer{
 
 .ribbon {
     font-size: 30px;
-    background-color: dodgerBlue; /* Change this to your desired background color */
-    color: white; /* Text color */
+    background-color: white; /* Change this to your desired background color */
+    color: Black; /* Text color */
     position: relative;
     padding: 1px 1px;
     text-align: left;
