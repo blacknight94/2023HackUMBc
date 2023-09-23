@@ -1,0 +1,63 @@
+/* comment for css */
+body {
+  border: 5px solid #ff0000;
+  background-color: black;
+  background-image:url('/static/img/cat.png');
+  background-size: cover;
+}
+
+.frontPanel {
+  font-size:20px;
+  height: auto;
+  border: 5px solid #ff0000;
+  width: 80%;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1500px;
+  padding-bottom: 20px;
+}
+
+.rounded{
+    border-radius: 10px;
+}
+
+footer{
+  border: 5px solid #ff0000;
+  background-color: dodgerBlue;
+  text-align: center;
+  color:white;
+  bottom: 5px;
+}
+
+.center {
+  text-align: center;
+  list-style-position: inside;
+  height:auto;
+  background-color: white;
+}
+
+/* creating class for the box fo*/
+
+
+
+.link {
+  color: black;
+}
+
+.link:visited {
+  color: red;
+}
+
+.ribbon {
+    font-size: 30px;
+    background-color: dodgerBlue; /* Change this to your desired background color */
+    color: white; /* Text color */
+    position: relative;
+    padding: 1px 1px;
+    text-align: left;
+}
+
+.ribbon p {
+    margin: 0;
+}
