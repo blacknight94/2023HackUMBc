@@ -22,7 +22,7 @@ def get_jsonparsed_data(url):
 
 # inputs are (company stock ticker)
 #returns, ESG Rating: ,stock market sentiment: (Good/bad?), Price Trend: (up/down), Current Price: $ , fear and greed index: (),
-def esgAPI(ticker):
+def esgAPITwo(ticker):
     my_ordered_dict = OrderedDict()
     my_ordered_dict['name'] = 'John'
     my_ordered_dict['ticker'] = ticker

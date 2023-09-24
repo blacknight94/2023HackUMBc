@@ -13,8 +13,8 @@ def index():
     if request.method == 'POST':
         data_from_form = request.form['submit']
 
-        dynsmic_data = esgAPI(data_from_form)
-        dynamic_data = apiFunctions.esgAPI(data_from_form)
+        dynamic_data = hellDiver.esgAPI(data_from_form)
+        # dynamic_data = apiFunctions.esgAPI(data_from_form)
         return render_template('index.html', dynamic_data=dynamic_data)
         # Process the data (e.g., save it, perform an action, etc.)
     return render_template('index.html', dynamic_data=dynamic_data)

@@ -31,31 +31,29 @@ def esgAPI(ticker):
 				
 				if end_index != -1:
 					content_between = html_content[start_index:end_index]
-				if(level == 0):
-					my_dict["Environment Risk Score:"] = content_between
-				elif(level == 1):
-					my_dict["Social Risk Score"] = content_between
-				else:
-					my_dict["Governance Risk Score"] = content_between
-				level += 1
+					if(level == 0):
+						my_dict["Environment Risk Score:"] = content_between
+					elif(level == 1):
+						my_dict["Social Risk Score"] = content_between
+					else:
+						my_dict["Governance Risk Score"] = content_between
+					level += 1
 			#print(f"	Instance {match.start() // len(target_string) + 1}: {content_between}")
-		else:
-			print(f"Instance {match.start() // len(target_string) + 1}: Content not found after target string.")
+				else:
+					print(f"Instance {match.start() // len(target_string) + 1}: Content not found after target string.")
 			# Stop after the first 3 instances
-		if match.start() // len(target_string) == 2:
-			break
-		
-		
-		target_string = '<div class="Fz(36px) Fw(600) D(ib) Mend(5px)">'
-		for match in re.finditer(re.escape(target_string), html_content):
-			start_index = match.end()
-			end_index = html_content.find('<', start_index)
-			if end_index != -1:
-				content_between = html_content[start_index:end_index]
-				my_dict["Total ESG Risk score") = content_between
-				#print(f"	Instance {match.start() // len(target_string) + 1}: {content_between}")
-			else:
-				print(f"Instance {match.start() // len(target_string) + 1}: Content not found after target string.")	
+				if (match.start() // len(target_string) == 2):
+					break
+			target_string = '<div class="Fz(36px) Fw(600) D(ib) Mend(5px)">'
+			for match in re.finditer(re.escape(target_string), html_content):
+				start_index = match.end()
+				end_index = html_content.find('<', start_index)
+				if end_index != -1:
+					content_between = html_content[start_index:end_index]
+					my_dict["Total ESG Risk score"] = content_between
+					#print(f"	Instance {match.start() // len(target_string) + 1}: {content_between}")
+				else:
+					print(f"Instance {match.start() // len(target_string) + 1}: Content not found after target string.")
 		else:
 			print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
 	except requests.exceptions.RequestException as e:
