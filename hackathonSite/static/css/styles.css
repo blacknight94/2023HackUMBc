@@ -12,6 +12,15 @@
   }
 }
 
+.title{
+    inline-size: auto;
+    writing-mode: horizontal-tb;
+    place-content: center;
+    padding: var(--size-5);
+    gap: var(--size-5);
+
+}
+
 @layer demo.support {
   body {
     display: grid;
@@ -22,14 +31,7 @@
 }
 /*end of copied code from online*/
 
-.title{
-    inline-size: auto;
-    writing-mode: horizontal-tb;
-    place-content: center;
-    padding: var(--size-5);
-    gap: var(--size-5);
 
-}
 
 /* comment for css */
 body {
@@ -46,7 +48,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   max-width: 1500px;
-  padding-bottom: 20px;
+  padding-bottom: 20px
+  width: 400px;
 }
 
 /*defines standard borders for all items*/
@@ -80,9 +83,10 @@ footer{
 
 .ribbon {
     font-size: 30px;
-    background-color: white; /* Change this to your desired background color */
+    background-color: dimgrey; /* Change this to your desired background color */
     color: Black; /* Text color */
     position: relative;
+    width: 1200px;
     padding: 1px 1px;
     text-align: left;
 }
