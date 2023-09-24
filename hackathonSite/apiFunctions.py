@@ -74,7 +74,8 @@ def gatherArticleProperties(article):
     # 5. Calculate the company's average sentiment and add the score to the company's average sentiment
     # 6. Add the company name to the name field
     # 7. Move to the next company ticker and repeat steps 1-6 until all the companies have been accounted for
-def esgApiCall(ticker):
+def newsAPICall(ticker):
+    ticker = ticker.upper()
     conn = http.client.HTTPSConnection('api.marketaux.com')
     params = urllib.parse.urlencode({
        'api_token': 'NsdaXCKVAUHOUJ6LqZp38DfFLfWUU2vPn3nDszKP',
@@ -109,4 +110,3 @@ def esgApiCall(ticker):
     print(companySentiments)
     return companySentiments
 
-esgApiCall('AAPL')

@@ -9,16 +9,8 @@
     background:
       linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
       var(--gradient-1) border-box;
+
   }
-}
-
-.title{
-    inline-size: auto;
-    writing-mode: horizontal-tb;
-    place-content: center;
-    padding: var(--size-5);
-    gap: var(--size-5);
-
 }
 
 @layer demo.support {
@@ -31,7 +23,14 @@
 }
 /*end of copied code from online*/
 
+.title{
+    inline-size: auto;
+    writing-mode: horizontal-tb;
+    place-content: center;
+    padding: var(--size-5);
+    gap: var(--size-5);
 
+}
 
 /* comment for css */
 body {
@@ -83,7 +82,7 @@ footer{
 
 .ribbon {
     font-size: 30px;
-    background-color: dimgrey; /* Change this to your desired background color */
+    background-color: #696969;; /* Change this to your desired background color */
     color: Black; /* Text color */
     position: relative;
     width: 1200px;

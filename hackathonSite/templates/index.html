@@ -6,6 +6,7 @@
     <title>SIREN</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
   </head>
+
 <body>
 
     <!--this creates our title uses code pulled from online-->
@@ -18,7 +19,7 @@
 
         <!--adding functionality to create a use-able button-->
         <form method="POST">
-            <input type="text" name="submit" placeholder="Enter Stock Ticker">
+            <input type="text" name="submit" placeholder="Enter Stock Ticker" value = "{{ submit }}"/>
             <button type="submit">Submit</button>
         </form>
 
@@ -50,8 +51,8 @@
             }
         </style>
         <tr>
-            <th>Key</th>
-            <th>Value</th>
+            <th>Metric</th>
+            <th>Score</th>
         </tr>
     </thead>
 
@@ -62,14 +63,33 @@
                 <td>{{ value }}</td>
             </tr>
             {% endfor %}
-
+        {% for value in newsData.items()["average sentiment"] %}
+        <tr>
+                <td>"Average Sentiment Score"</td>
+                <td>{{ value }}</td>
+            </tr>
+    {% endfor %}
         </tbody>
     </table>
-
+        <center>scores out of ten</center>
     </div>
+
+    <!--creates the related articles section-->
     <div class="frontPanel rounded-border-gradient">
         <h2>Related Articles</h2>
-        <a class="link" href="NotARealDomain_OrIsIt"> www.linkhere.com</a>
+<table>
+        {% for article in newsData["articles"] %}
+            <tr>
+                <td>{{ article['title'] }}</td>
+
+
+                <td><a href="{{ article['url'] }}" target="_blank">{{ article['url'] }}</a></td>
+
+            </tr>
+        {% endfor %}
+</table>
+        <!--<a class="link" href="NotARealDomain_OrIsIt"> www.linkhere.com</a>
+        -->
     </div>
 
     <footer>
