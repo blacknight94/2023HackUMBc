@@ -63,15 +63,14 @@
                 <td>{{ value }}</td>
             </tr>
             {% endfor %}
-        {% for value in newsData.items()["average sentiment"] %}
+
         <tr>
-                <td>"Average Sentiment Score"</td>
-                <td>{{ value }}</td>
+                <td>Average Sentiment Score</td>
+                <td>{{ newsData['average sentiment'] }}</td>
             </tr>
-    {% endfor %}
+
         </tbody>
     </table>
-        <center>scores out of ten</center>
     </div>
 
     <!--creates the related articles section-->

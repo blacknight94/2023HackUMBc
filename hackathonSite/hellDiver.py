@@ -32,7 +32,7 @@ def esgAPI(ticker):
 				if end_index != -1:
 					content_between = html_content[start_index:end_index]
 					if(level == 0):
-						my_dict["Environment Risk Score:"] = content_between
+						my_dict["Environment Risk Score"] = content_between
 					elif(level == 1):
 						my_dict["Social Risk Score"] = content_between
 					else:
