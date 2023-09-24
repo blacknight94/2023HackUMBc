@@ -1,24 +1,21 @@
 from collections import OrderedDict
+from flask import Flask, request, render_template
 
-from flask import Flask, render_template
+import apiFunctions
 
 app = Flask(__name__)
-dynamic_data = {"Key":"Item", "key2":"item2"}
 
-@app.route("/")
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', data=dynamic_data)
+    dynamic_data = {"Key": "Item", "key2": "item2"}
+    if request.method == 'POST':
+        print("here ")
+        data_from_form = request.form['submit']
+        dynamic_data = apiFunctions.APIcalls(data_from_form)
+        return render_template('index.html', dynamic_data=dynamic_data)
+        # Process the data (e.g., save it, perform an action, etc.)
+    return render_template('index.html', dynamic_data=dynamic_data)
 
-# inputs are (company stock ticker)
-# returns, ESG Rating: ,stock market sentiment: (Good/bad?), Price Trend: (up/down), Current Price: $ , fear and greed index: (),
-def APIcalls(ticker):
 
-    my_ordered_dict = OrderedDict()
-    my_ordered_dict['name'] = 'John'
-    my_ordered_dict['ticker'] = ticker
 
-    with open('output.txt', 'w') as file:
-        file.write(my_ordered_dict)
-        file.write('\n')
-
-    return my_ordered_dict

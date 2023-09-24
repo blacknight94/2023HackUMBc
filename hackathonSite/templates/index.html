@@ -8,18 +8,18 @@
   </head>
 <body>
     <div class="ribbon">
-        <h1>SIREN</h1>
+        <h1>SINER: Stock, Impact, News, and Environmental Ratings</h1>
     </div>
 
     <!-- uses both frontPanel and center class to create the buttons shown at top of page-->
     <div class="frontPanel center">
         <label for="Ticker">Ticker: </label>
         <input name="Ticker" id="Ticker" />
-        <button type="button" name="TickerSubmit">Enter</button>
 
         <!--adding functionality to create a use-able button-->
-        <form>
-            Ticker:<input type ="text" name="ticker">
+        <form method="POST">
+            <input type="text" name="submit" placeholder="Enter Stock Ticker">
+            <button type="submit">Submit</button>
         </form>
 
         <br />
@@ -37,14 +37,28 @@
         <input name="industry" id="industry" />
 
         <p></p>
+    <table border="1">
+    <thead>
+        <style>
+            /* Center the table horizontally */
+            table {
+                margin: 0 auto;
+            }
+        </style>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        </thead>
         <tbody>
-            {% for key, value in data.items() %}
+            {% for key, value in dynamic_data.items() %}
             <tr>
                 <td>{{ key }}</td>
                 <td>{{ value }}</td>
             </tr>
             {% endfor %}
         </tbody>
+    </table>
     </div>
     <div class="frontPanel">
         <h2>Related Articles</h2>
