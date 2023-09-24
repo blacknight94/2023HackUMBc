@@ -1,15 +1,46 @@
+/*test code to create nice borders found online*/
+@import "https://unpkg.com/open-props" layer(design.system);
+@import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
+
+@layer demo {
+  .rounded-border-gradient {
+    border: solid var(--size-2) transparent; /*sets width of border*/
+    border-radius: var(--radius-4);
+    background:
+      linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+      var(--gradient-1) border-box;
+  }
+}
+
+@layer demo.support {
+  body {
+    display: grid;
+    place-content: center;
+    padding: var(--size-5);
+    gap: var(--size-5);
+  }
+}
+/*end of copied code from online*/
+
+.title{
+    inline-size: auto;
+    writing-mode: horizontal-tb;
+    place-content: center;
+    padding: var(--size-5);
+    gap: var(--size-5);
+
+}
+
 /* comment for css */
 body {
-  border: 5px solid #ff0000;
   background-color: black;
-  background-image:url('/static/img/cat.png');
+  background-image:url('/static/img/home.jpg');
   background-size: cover;
 }
 
 .frontPanel {
   font-size:20px;
   height: auto;
-  border: 5px solid #ff0000;
   width: 80%;
   background-color: white;
   margin-left: auto;
@@ -20,13 +51,11 @@ body {
 
 /*defines standard borders for all items*/
 .border{
-  background: transparent;
-  border = 5px solid grey;
+  border = 10px solid grey;
   border-radius: 10px;/*creates rounded edges maybe*/
 }
 
 footer{
-  border: 5px solid #ff0000;
   background-color: dodgerBlue;
   text-align: center;
   color:white;

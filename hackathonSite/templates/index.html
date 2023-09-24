@@ -7,14 +7,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
   </head>
 <body>
-    <div class="ribbon">
+
+    <!--this creates our title uses code pulled from online-->
+    <div class="ribbon rounded-border-gradient title">
         <h1>SINER: Stock, Impact, News, and Environmental Ratings</h1>
     </div>
 
+    <!--to create scrollbar-->
+    <div>
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align:justify;
+    </div>
+
     <!-- uses both frontPanel and center class to create the buttons shown at top of page-->
-    <div class="frontPanel center">
-        <label for="Ticker">Ticker: </label>
-        <input name="Ticker" id="Ticker" />
+    <div class="frontPanel center border rounded-border-gradient">
 
         <!--adding functionality to create a use-able button-->
         <form method="POST">
@@ -49,7 +56,8 @@
             <th>Key</th>
             <th>Value</th>
         </tr>
-        </thead>
+    </thead>
+
         <tbody>
             {% for key, value in dynamic_data.items() %}
             <tr>
@@ -57,10 +65,12 @@
                 <td>{{ value }}</td>
             </tr>
             {% endfor %}
+
         </tbody>
     </table>
+
     </div>
-    <div class="frontPanel">
+    <div class="frontPanel rounded-border-gradient">
         <h2>Related Articles</h2>
         <a class="link" href="NotARealDomain_OrIsIt"> www.linkhere.com</a>
     </div>
