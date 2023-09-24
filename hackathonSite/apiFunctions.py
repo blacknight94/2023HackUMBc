@@ -1,12 +1,16 @@
 '''
 list of APIs
 Type: Stock
-	https://www.marketaux.com/account/dashboard
-		Key: dhk2UcDC8sBcXYWxl3s1vakApOFz8fcPANBKuasu
+    https://www.marketaux.com/account/dashboard
+        Key: dhk2UcDC8sBcXYWxl3s1vakApOFz8fcPANBKuasu
 Type: environmental score
-	https://site.financialmodelingprep.com/developer/docs/esg-score-api/
-		Key: c19ce88a3013da9410087ae6fdeed269
+    https://site.financialmodelingprep.com/developer/docs/esg-score-api/
+        Key: c19ce88a3013da9410087ae6fdeed269
+Type: media sentiment
+    https://www.marketaux.com/
+        Key: NsdaXCKVAUHOUJ6LqZp38DfFLfWUU2vPn3nDszKP
 '''
+# Imports
 import json
 import certifi
 
@@ -14,56 +18,95 @@ import http.client, urllib.parse
 from urllib.request import urlopen
 from collections import OrderedDict
 
-def get_jsonparsed_data(url):
+import numpy as np
 
-    response = urlopen(url, cafile=certifi.where())
-    data = response.read().decode("utf-8")
-    return json.loads(data)
+sentimentList = []
+
+# Checks if the company ticker is mentioned in the article and returns the entity index for which the company ticker was found
+# If the company is not mentioned, doesn't return anything
+def checkCompanyMention(companyTicker, article):
+    mentions = article['entities']
+    entityIndex = 0
+    mentionFound = False
+    for mention in mentions:
+        if companyTicker == mention['symbol']:
+            mentionFound = True
+            return entityIndex
+        else:
+            entityIndex += 1
+    if mentionFound != True:
+        return None
+
+
+# Accesses the specific entity found from the checkCompanyMention, extracts the sentiment score, and adds it to the sentiment score list
+def addSentimentScore(article, entityIndex):
+    sentimentList.append(article['entities'][entityIndex]['sentiment_score'])
+
+
+# Turns the list of sentiment scores into an array and calculates the average using NumPy
+def calculateAverageSentiment(allSentiments):
+    averageSentiment = np.mean(np.array(allSentiments))
+    return averageSentiment
+
+
+# Gathers the article properties for which the company was mentioned such as title, url, snippet, and publishing datetime
+def gatherArticleProperties(article):
+    title = article['title']
+    url = article['url']
+    snippet = article['snippet']
+    publishing = article['published_at']
+    return title, url, snippet, publishing
+
 
 # inputs are (company stock ticker)
-#returns, ESG Rating: ,stock market sentiment: (Good/bad?), Price Trend: (up/down), Current Price: $ , fear and greed index: (),
-def esgAPITwo(ticker):
-    my_ordered_dict = OrderedDict()
-    my_ordered_dict['name'] = 'John'
-    my_ordered_dict['ticker'] = ticker
-    esgAPI = "c19ce88a3013da9410087ae6fdeed269"
-    # ESG Score info
-    """
-    url = "https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data?symbol=" + ticker + "&apikey=" + esgAPI
-    data = get_jsonparsed_data(url)
-    my_ordered_dict["Environmental_Score"] = data[0].get("environmentalScore")
-    my_ordered_dict["Social_Score"] = data[0].get("socialScore")
-    my_ordered_dict["Government_Score"] = data[0].get("governanceScore")
-    my_ordered_dict["Total_ESG_Score"] = data[0].get("ESGScore")
+# returns, ESG Rating: ,stock market sentiment: (Good/bad?), Price Trend: (up/down), Current Price: $ , fear and greed index: (),
 
-    # esg risk rating
-    url = "https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol=" + ticker + "&apikey=" + esgAPI
-    data = get_jsonparsed_data(url)
-    my_ordered_dict["Industries"] = data[0].get("industry")
-    my_ordered_dict["ESG_Rating"] = data[0].get("ESGRiskRating")
-    my_ordered_dict["Industry_Rank"] = data[0].get("industryRank")
+# Templating code
+    # Cole
+    # MarketTauxAPI Call, creates dataset containing all the articles returned by the search pertaining to a company of interest
 
-    print(get_jsonparsed_data(url))
-    # twitter comments, and other
-    url = "https://financialmodelingprep.com/api/v4/historical/social-sentiment?symbol=" + ticker + "&page=0&apikey=" + esgAPI
-    data = get_jsonparsed_data(url)
-    my_ordered_dict["twitter_Posts"] = data[0].get("twitterPosts")
-    my_ordered_dict["twitter_Sentiment"] = data[0].get("twitterSentiment")
-    my_ordered_dict["twitter_Likes"] = data[0].get("twitterLikes")
-    """
-    my_ordered_dict["Environmental_Score"] = "38.5"
-    my_ordered_dict["Social_Score"] = "2.13"
-    my_ordered_dict["Total_ESG_Score"] = "37"
-    my_ordered_dict["Industries"] = "Maufacturing, Electical, Software"
-    my_ordered_dict["ESG_Rating"] = "84.7"
-    my_ordered_dict["Industry_Rank"] = "B+" 
-    my_ordered_dict["twitter_Posts"] = "3562"
-    my_ordered_dict["twitter_Sentiment"] = "36.6"
-    my_ordered_dict["twitter_Likes"] = "23578"
+    # Driver code
+    # 1. Take the first company ticker
+    # 2. Check each of the articles to see if the company is mentioned
+    # 3. If the company is mentioned, get the sentiment score and add it to the array of sentiments. In addition, gather the
+    # article properties
+    # 4. Add the all the articles and their properties to th e company's list of articles
+    # 5. Calculate the company's average sentiment and add the score to the company's average sentiment
+    # 6. Add the company name to the name field
+    # 7. Move to the next company ticker and repeat steps 1-6 until all the companies have been accounted for
+def esgApiCall(ticker):
+    conn = http.client.HTTPSConnection('api.marketaux.com')
+    params = urllib.parse.urlencode({
+       'api_token': 'NsdaXCKVAUHOUJ6LqZp38DfFLfWUU2vPn3nDszKP',
+       'symbols': ticker,
+       'limit': 3,
+       'must_have_entities': True
+    })
+    conn.request('GET', '/v1/news/all?{}'.format(params))
+    res = conn.getresponse()
 
-    with open('output.txt', 'w') as file:
-        for key, value in my_ordered_dict:
-            file.write(f'{key}: {value},')
-        file.write('\n')
+    data = res.read()
+    dataset = json.loads(data.decode('utf-8'))
+    companies = [ticker]
+    companySentiments = {
+       company: {
+          'name': '',
+          'average sentiment': float,
+          'articles': []
+       }
+       for company in companies
+    }
+    for company in companies:  # Step 1
+        for newsArticle in dataset['data']:  # Step 2
+            entityInd = checkCompanyMention(company, newsArticle)
+            if entityInd != None:  # Step 3
+                addSentimentScore(newsArticle, entityInd)
+                title, url, snippet, publishing = gatherArticleProperties(newsArticle)
+                companySentiments[company]['articles'].append(
+                    {'title': title, 'url': url, 'snippet': snippet, 'published_at': publishing})  # Step 4
+            companySentiments[company]['average sentiment'] = calculateAverageSentiment(sentimentList)  # Step 5
+            companySentiments[company]['name'] = newsArticle['entities'][entityInd]['name']  # Step 6
+    print(companySentiments)
+    return companySentiments
 
-    return my_ordered_dict
+esgApiCall('AAPL')
