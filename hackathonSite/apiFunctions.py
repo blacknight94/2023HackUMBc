@@ -22,14 +22,13 @@ def get_jsonparsed_data(url):
 
 # inputs are (company stock ticker)
 #returns, ESG Rating: ,stock market sentiment: (Good/bad?), Price Trend: (up/down), Current Price: $ , fear and greed index: (),
-def APIcalls(ticker):
-    print("OUT")
+def esgAPI(ticker):
     my_ordered_dict = OrderedDict()
     my_ordered_dict['name'] = 'John'
     my_ordered_dict['ticker'] = ticker
     esgAPI = "c19ce88a3013da9410087ae6fdeed269"
     # ESG Score info
-
+    """
     url = "https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data?symbol=" + ticker + "&apikey=" + esgAPI
     data = get_jsonparsed_data(url)
     my_ordered_dict["Environmental_Score"] = data[0].get("environmentalScore")
@@ -51,17 +50,20 @@ def APIcalls(ticker):
     my_ordered_dict["twitter_Posts"] = data[0].get("twitterPosts")
     my_ordered_dict["twitter_Sentiment"] = data[0].get("twitterSentiment")
     my_ordered_dict["twitter_Likes"] = data[0].get("twitterLikes")
-
+    """
+    my_ordered_dict["Environmental_Score"] = "38.5"
+    my_ordered_dict["Social_Score"] = "2.13"
+    my_ordered_dict["Total_ESG_Score"] = "37"
+    my_ordered_dict["Industries"] = "Maufacturing, Electical, Software"
+    my_ordered_dict["ESG_Rating"] = "84.7"
+    my_ordered_dict["Industry_Rank"] = "B+" 
+    my_ordered_dict["twitter_Posts"] = "3562"
+    my_ordered_dict["twitter_Sentiment"] = "36.6"
+    my_ordered_dict["twitter_Likes"] = "23578"
 
     with open('output.txt', 'w') as file:
-        file.write('OngoBongo')
+        for key, value in my_ordered_dict:
+            file.write(f'{key}: {value},')
         file.write('\n')
 
     return my_ordered_dict
-
-
-
-
-
-
-
