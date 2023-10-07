@@ -2,6 +2,7 @@ This project was completed in 24 hours at the 2023 UMBC hackathon to compete in 
 
 My contributions:
 - i was responsible for front end developement utilizing HTML and CSS as well as flask to run a local verison of the website. This was my first time doing any front end developement.
+  (p.s. the reason my commits dont show up was due to me having a typo in my email for git config)
 
 common packages needed for website to work
 numpy
@@ -9,4 +10,8 @@ flask
 python
 requests
 
-to run code use command flask --app run main
+to run code:
+- navigate to \2023HackUMBc\hackathonsite
+- use command flask --app main run and click on the url
+
+
